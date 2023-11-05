@@ -5,7 +5,6 @@ const personalKey = "Vera-Bu";
 const baseHost = "https://webdev-hw-api.vercel.app";
 const postsHost = `${baseHost}/api/v1/${personalKey}/instapro`;
 //let token = "Bearer bgc0b8awbwas6g5g5k5o5s5w606g37w3cc3bo3b83k39s3co3c83c03ck";
-//let token = "Bearer 9kb8cob8c8b8dgas6gd4b8coas6464646g9kb8coas";//vereneya
 export function getPosts({ token }) {
   return fetch(postsHost, {
     method: "GET",
