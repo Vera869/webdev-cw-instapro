@@ -204,32 +204,32 @@ export function getPostsOneUser({ token, userId }) {
       console.warn(error)
   })
 }
-// export function addLikePost({ token, postId }) {
-//   return fetch(`${postsHost}/${postId}/like`, {
-//       method: 'POST',
-//       headers: {
-//         Authorization: token,
-//       },
-//   }).then((response) => {
-//       if (response.status === 401) {
-//         alert('Ставить лайки могут только авторизованные пользователи')
-//         throw new Error('Нет авторизации')
-//       }
-//       return response.json()
-//   })
-// }
+export function addLikePost({ token, postId }) {
+  return fetch(`${postsHost}/${postId}/like`, {
+      method: 'POST',
+      headers: {
+        Authorization: token,
+      },
+  }).then((response) => {
+      if (response.status === 401) {
+        alert('Ставить лайки могут только авторизованные пользователи')
+        throw new Error('Нет авторизации')
+      }
+      return response.json()
+  })
+}
 
-// export function dislikePost({ token, postId }) {
-//   return fetch(`${postsHost}/${postId}/dislike`, {
-//       method: 'POST',
-//       headers: {
-//         Authorization: token,
-//       },
-//   }).then((response) => {
-//       if (response.status === 401) {
-//         alert('Ставить лайки могут только авторизованные пользователи')
-//         throw new Error('Нет авторизации')
-//       }
-//       return response.json()
-//   })
-// }
+export function dislikePost({ token, postId }) {
+  return fetch(`${postsHost}/${postId}/dislike`, {
+      method: 'POST',
+      headers: {
+        Authorization: token,
+      },
+  }).then((response) => {
+      if (response.status === 401) {
+        alert('Ставить лайки могут только авторизованные пользователи')
+        throw new Error('Нет авторизации')
+      }
+      return response.json()
+  })
+}
