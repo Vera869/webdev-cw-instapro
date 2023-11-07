@@ -153,10 +153,10 @@ export function addPost({ token, imageUrl }) {
     method: 'POST',
      body: JSON.stringify({
         description: descriptionInputElement.value
-             .replaceAll('&', '&amp;')
-            .replaceAll('<', '&lt;')
-            .replaceAll('>', '&gt;')
-             .replaceAll('"', '&quot;'),
+          .replaceAll('&', '&amp;')
+          .replaceAll('<', '&lt;')
+          .replaceAll('>', '&gt;')
+          .replaceAll('"', '&quot;'),
          imageUrl,
      }),
      headers: {
@@ -164,10 +164,72 @@ export function addPost({ token, imageUrl }) {
      },
   }).then((response) => {
       if (response.status === 400) {
-          alert('Заполнены не все поля')
-          throw new Error('Некорректно введены данные')
+        alert('Заполнены не все поля')
+        throw new Error('Некорректно введены данные')
       } else {
-          return response.json()
+        return response.json()
       }
   })
 }
+export function delPost({ token, postId }) {
+  return fetch(`${postsHost}/${postId}`, {
+      method: 'DELETE',
+      headers: {
+          Authorization: token,
+      },
+  }).then((response) => {
+      if (response.status === 401) {
+        alert('Удалять посты могут только авторизованные пользователи')
+        throw new Error('Нет авторизации')
+      }
+      return response.json()
+  })
+}
+export function getPostsOneUser({ token, userId }) {
+  return fetch(`${postsHost}/user-posts/${userId}`, {
+    method: 'GET',
+    headers: {
+      Authorization: token,
+    },
+  }).then((response) => {
+      if (response.status === 401) {
+          throw new Error('Нет авторизации')
+       }
+      return response.json()
+  }).then((data) => {
+      setPosts(data.posts)
+      return data.posts
+  }).catch((error) => {
+      alert('Кажется, у вас сломался интернет, попробуйте позже')
+      console.warn(error)
+  })
+}
+// export function addLikePost({ token, postId }) {
+//   return fetch(`${postsHost}/${postId}/like`, {
+//       method: 'POST',
+//       headers: {
+//         Authorization: token,
+//       },
+//   }).then((response) => {
+//       if (response.status === 401) {
+//         alert('Ставить лайки могут только авторизованные пользователи')
+//         throw new Error('Нет авторизации')
+//       }
+//       return response.json()
+//   })
+// }
+
+// export function dislikePost({ token, postId }) {
+//   return fetch(`${postsHost}/${postId}/dislike`, {
+//       method: 'POST',
+//       headers: {
+//         Authorization: token,
+//       },
+//   }).then((response) => {
+//       if (response.status === 401) {
+//         alert('Ставить лайки могут только авторизованные пользователи')
+//         throw new Error('Нет авторизации')
+//       }
+//       return response.json()
+//   })
+// }
