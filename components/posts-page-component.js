@@ -8,7 +8,7 @@ import {
     renderApp,
     setPosts,
 } from '../index.js'
-import { addLikePost, delPost, dislikePost, getPosts } from '../api'
+import { addLikePost, delPost, dislikePost, getPosts } from '../api.js'
 // import { formatDistanceToNow } from 'date-fns'
 // import { ru } from 'date-fns/locale'
 
