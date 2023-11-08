@@ -9,8 +9,8 @@ import {
     setPosts,
 } from '../index.js'
 import { addLikePost, delPost, dislikePost, getPosts } from '../api.js'
-// import { formatDistanceToNow } from 'date-fns'
-// import { ru } from 'date-fns/locale'
+import { formatDistanceToNow } from 'date-fns'
+import { ru } from 'date-fns/locale'
 
 
 export function renderPostsPageComponent() {
@@ -20,8 +20,8 @@ export function renderPostsPageComponent() {
     return {
         postId: post.id,
         imageUrl: post.imageUrl,
-        // createdAt: formatDistanceToNow(new Date(post.createdAt), {locale: ru,}),
-        createdAt: new Date(post.createdAt),
+        createdAt: formatDistanceToNow(new Date(post.createdAt), {locale: ru,}),
+        //createdAt: new Date(post.createdAt),
         description: post.description,
         userId: post.user.id,
         userName: post.user.name,
