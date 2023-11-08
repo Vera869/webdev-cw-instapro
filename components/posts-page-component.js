@@ -44,6 +44,7 @@ export function renderPostsPageComponent() {
           <div class="post-header" data-user-id="${post.userId}">
             <img src="${post.userImageUrl}" class="post-header-user-image">
             <p class="post-header-user-name">${post.userName}</p></div>
+            <br></br>
             <div class="delete-button-container">
             <button class="delete-button ${
                 localUser === null || post.userId !== localUserId
@@ -54,6 +55,7 @@ export function renderPostsPageComponent() {
             }">Удалить</button>
           </div>
           </div>
+          <br></br>
           <div class="post-image-container">
              <img class="post-image" data-post-id="${post.postId}" src="${
                 post.imageUrl
