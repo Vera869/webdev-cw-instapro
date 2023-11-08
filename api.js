@@ -1,10 +1,10 @@
-import { renderApp, setPosts } from './index.js'
+import { renderApp, setPosts } from "./index.js";
 
 // Замени на свой, чтобы получить независимый от других набор данных.
 // "боевая" версия инстапро лежит в ключе prod
 //const personalKey = "prod";
 const personalKey = "Vera-Bu";
-const baseHost = 'https://wedev-api.sky.pro';
+const baseHost = "https://wedev-api.sky.pro";
 const postsHost = `${baseHost}/api/v1/${personalKey}/instapro`;
 //let token = "Bearer bgc0b8awbwas6g5g5k5o5s5w606g37w3cc3bo3b83k39s3co3c83c03ck";
 
@@ -16,11 +16,11 @@ export function getPosts({ token }) {
     },
   })
     .then((response) => {
-      if(response.status === 500) {
+      if (response.status === 500) {
         throw new Error("Сервер сломался");
       }
-      if(!navigator.onLine) {
-        throw new Error("нет интернета")
+      if (!navigator.onLine) {
+        throw new Error("нет интернета");
       }
       if (response.status === 401) {
         throw new Error("Нет авторизации");
@@ -28,10 +28,12 @@ export function getPosts({ token }) {
       return response.json();
     })
     .then((data) => {
-      setPosts(data.posts)
+      setPosts(data.posts);
       return data.posts;
-    }).catch((error) => {
-      alert('Кажется, у вас сломался интернет, попробуйте позже')})
+    })
+    .catch((error) => {
+      alert("Кажется, у вас сломался интернет, попробуйте позже");
+    });
 }
 
 // https://github.com/GlebkaF/webdev-hw-api/blob/main/pages/api/user/README.md#%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%D1%81%D1%8F
@@ -40,44 +42,49 @@ export function registerUser({ login, password, name, imageUrl }) {
     method: "POST",
     body: JSON.stringify({
       login: login
-          .replaceAll("&", "&amp;")
-          .replaceAll("<", "&lt;")
-          .replaceAll(">", "&gt;")
-          .replaceAll('"', "&quot;"),
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;"),
       password: password
-          .replaceAll("&", "&amp;")
-          .replaceAll("<", "&lt;")
-          .replaceAll(">", "&gt;")
-          .replaceAll('"', "&quot;"),
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;"),
       name: name
-          .replaceAll("&", "&amp;")
-          .replaceAll("<", "&lt;")
-          .replaceAll(">", "&gt;")
-          .replaceAll('"', "&quot;"),
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;"),
       imageUrl,
     }),
-  }).then((response) => {
-    if(response.status === 500) {
-      throw new Error("Сервер сломался");
-    }
-    if(!navigator.onLine) {
-      throw new Error("нет интернета")
-   }
-    if (response.status === 400) {
-      throw new Error("Такой пользователь уже существует");
-    }
-    return response.json();
-  }).catch((error) => {
-    if (error.message === "Сервер сломался") {
-      alert("Сервер сломался, попробуй позже");
-      return;
-    } if (error.message === "нет интернета") {
-      alert("Кажется, у вас сломался интернет, попробуйте позже");
-      return}
+  })
+    .then((response) => {
+      if (response.status === 500) {
+        throw new Error("Сервер сломался");
+      }
+      if (!navigator.onLine) {
+        throw new Error("нет интернета");
+      }
+      if (response.status === 400) {
+        throw new Error("Такой пользователь уже существует");
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      if (error.message === "Сервер сломался") {
+        alert("Сервер сломался, попробуй позже");
+        return;
+      }
+      if (error.message === "нет интернета") {
+        alert("Кажется, у вас сломался интернет, попробуйте позже");
+        return;
+      }
       if (error.message === "Такой пользователь уже существует") {
         alert("Кажется, такой пользователь уже существует");
-        return}
-  });
+        return;
+      }
+    });
 }
 
 export function loginUser({ login, password }) {
@@ -87,28 +94,33 @@ export function loginUser({ login, password }) {
       login,
       password,
     }),
-  }).then((response) => {
-    if (response.status === 400) {
-      throw new Error("Неверный логин или пароль");
-    }
-    if(response.status === 500) {
-      throw new Error("Сервер сломался");
-    }
-    if(!navigator.onLine) {
-      throw new Error("нет интернета")
-   }
-    return response.json();
-  }).catch((error) => {
-    if (error.message === "Сервер сломался") {
-      alert("Сервер сломался, попробуй позже");
-      return;
-    } if (error.message === "нет интернета") {
-      alert("Кажется, у вас сломался интернет, попробуйте позже");
-      return}
+  })
+    .then((response) => {
+      if (response.status === 400) {
+        throw new Error("Неверный логин или пароль");
+      }
+      if (response.status === 500) {
+        throw new Error("Сервер сломался");
+      }
+      if (!navigator.onLine) {
+        throw new Error("нет интернета");
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      if (error.message === "Сервер сломался") {
+        alert("Сервер сломался, попробуй позже");
+        return;
+      }
+      if (error.message === "нет интернета") {
+        alert("Кажется, у вас сломался интернет, попробуйте позже");
+        return;
+      }
       if (error.message === "Неверный логин или пароль") {
         alert("Неверный логин или пароль");
-        return}
-  });
+        return;
+      }
+    });
 }
 
 // Загружает картинку в облако, возвращает url загруженной картинки
@@ -119,113 +131,120 @@ export function uploadImage({ file }) {
   return fetch(baseHost + "/api/upload/image", {
     method: "POST",
     body: data,
-  }).then((response) => {
-    if(response.status === 500) {
-      throw new Error("Сервер сломался");
-    }
-    if(!navigator.onLine) {
-      throw new Error("нет интернета")
-   }
-   if (response.status === 400) {
-    alert('Размер изображения превышает установленный')
-    renderApp()
-    throw new Error('Слишком большое изображение')
-    } else {
-      return response.json();
-    }
-  }).catch((error) => {
-    if (error.message === "Сервер сломался") {
-      alert("Сервер сломался, попробуй позже");
-      return;
-    } if (error.message === "нет интернета") {
-      alert("Кажется, у вас сломался интернет, попробуйте позже");
-      return}
-  });
+  })
+    .then((response) => {
+      if (response.status === 500) {
+        throw new Error("Сервер сломался");
+      }
+      if (!navigator.onLine) {
+        throw new Error("нет интернета");
+      }
+      if (response.status === 400) {
+        alert("Размер изображения превышает установленный");
+        renderApp();
+        throw new Error("Слишком большое изображение");
+      } else {
+        return response.json();
+      }
+    })
+    .catch((error) => {
+      if (error.message === "Сервер сломался") {
+        alert("Сервер сломался, попробуй позже");
+        return;
+      }
+      if (error.message === "нет интернета") {
+        alert("Кажется, у вас сломался интернет, попробуйте позже");
+        return;
+      }
+    });
 }
 
 export function addPost({ token, imageUrl }) {
-  const descriptionInputElement = document.getElementById('description')
+  const descriptionInputElement = document.getElementById("description");
   return fetch(postsHost, {
-    method: 'POST',
-     body: JSON.stringify({
-        description: descriptionInputElement.value
-          .replaceAll('&', '&amp;')
-          .replaceAll('<', '&lt;')
-          .replaceAll('>', '&gt;')
-          .replaceAll('"', '&quot;'),
-         imageUrl,
-     }),
-     headers: {
-         Authorization: token,
-     },
-  }).then((response) => {
-      if (response.status === 400) {
-        alert('Заполнены не все поля')
-        throw new Error('Некорректно введены данные')
-      } else {
-        return response.json()
-      }
-  })
-}
-export function delPost({ token, postId }) {
-  return fetch(`${postsHost}/${postId}`, {
-      method: 'DELETE',
-      headers: {
-          Authorization: token,
-      },
-  }).then((response) => {
-      if (response.status === 401) {
-        alert('Удалять посты могут только авторизованные пользователи')
-        throw new Error('Нет авторизации')
-      }
-      return response.json()
-  })
-}
-export function getPostsOneUser({ token, userId }) {
-  return fetch(`${postsHost}/user-posts/${userId}`, {
-    method: 'GET',
+    method: "POST",
+    body: JSON.stringify({
+      description: descriptionInputElement.value
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;"),
+      imageUrl,
+    }),
     headers: {
       Authorization: token,
     },
   }).then((response) => {
-      if (response.status === 401) {
-          throw new Error('Нет авторизации')
-       }
-      return response.json()
-  }).then((data) => {
-      setPosts(data.posts)
-      return data.posts
-  }).catch((error) => {
-      alert('Кажется, у вас сломался интернет, попробуйте позже')
-      console.warn(error)
+    if (response.status === 400) {
+      alert("Заполнены не все поля");
+      throw new Error("Некорректно введены данные");
+    } else {
+      return response.json();
+    }
+  });
+}
+export function delPost({ token, postId }) {
+  return fetch(`${postsHost}/${postId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: token,
+    },
+  }).then((response) => {
+    if (response.status === 401) {
+      alert("Удалять посты могут только авторизованные пользователи");
+      throw new Error("Нет авторизации");
+    }
+    return response.json();
+  });
+}
+export function getPostsOneUser({ token, userId }) {
+  return fetch(`${postsHost}/user-posts/${userId}`, {
+    method: "GET",
+    headers: {
+      Authorization: token,
+    },
   })
+    .then((response) => {
+      if (response.status === 401) {
+        throw new Error("Нет авторизации");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      setPosts(data.posts);
+      return data.posts;
+    })
+    .catch((error) => {
+      alert("Кажется, у вас сломался интернет, попробуйте позже");
+      console.warn(error);
+    });
 }
 export function addLikePost({ token, postId }) {
   return fetch(`${postsHost}/${postId}/like`, {
-      method: 'POST',
-      headers: {
-        Authorization: token,
-      },
+    method: "POST",
+    headers: {
+      Authorization: token,
+    },
   }).then((response) => {
-      if (response.status === 401) {
-        alert('Ставить лайки могут только авторизованные пользователи')
-        throw new Error('Нет авторизации')
-      }
-      return response.json()
-  })
+    if (response.status === 401) {
+      alert("Ставить лайки могут только авторизованные пользователи");
+      throw new Error("Нет авторизации");
+    }
+    return response.json();
+  });
 }
 
 export function dislikePost({ token, postId }) {
   return fetch(`${postsHost}/${postId}/dislike`, {
-      method: 'POST',
-      headers: {
-        Authorization: token,
-      },
+    method: "POST",
+    headers: {
+      Authorization: token,
+    },
   }).then((response) => {
-      if (response.status === 401) {
-        alert('Ставить лайки могут только авторизованные пользователи')
-        throw new Error('Нет авторизации')
-      }
-      return response.json()
-  })
+    if (response.status === 401) {
+      alert("Ставить лайки могут только авторизованные пользователи");
+      throw new Error("Нет авторизации");
+    }
+    return response.json();
+  });
 }

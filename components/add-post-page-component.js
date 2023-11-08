@@ -1,8 +1,8 @@
-import { renderUploadImageComponent } from './upload-image-component.js'
-import { renderHeaderComponent } from './header-component.js'
+import { renderUploadImageComponent } from "./upload-image-component.js";
+import { renderHeaderComponent } from "./header-component.js";
 
 export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
-  let imageUrl = ''
+  let imageUrl = "";
 
   const appHtml = `<div class="page-container">
     <div class="header-container"></div>
@@ -24,27 +24,27 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
           </div>
       </div>
    </div>
-`
+`;
 
-  appEl.innerHTML = appHtml
+  appEl.innerHTML = appHtml;
 
   renderHeaderComponent({
-      element: document.querySelector('.header-container'),
-  })
+    element: document.querySelector(".header-container"),
+  });
 
   renderUploadImageComponent({
-      element: document.querySelector('.upload-image-container'),
-      onImageUrlChange(newImageUrl) {
-          imageUrl = newImageUrl
-      },
-  })
+    element: document.querySelector(".upload-image-container"),
+    onImageUrlChange(newImageUrl) {
+      imageUrl = newImageUrl;
+    },
+  });
 
-  document.getElementById('add-button').addEventListener('click', () => {
-      const description = document.getElementById('description').value
+  document.getElementById("add-button").addEventListener("click", () => {
+    const description = document.getElementById("description").value;
 
-      onAddPostClick({
-          description: description,
-          imageUrl: imageUrl,
-      })
-  })
+    onAddPostClick({
+      description: description,
+      imageUrl: imageUrl,
+    });
+  });
 }

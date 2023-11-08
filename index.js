@@ -1,4 +1,4 @@
-import { addPost, getPosts, getPostsOneUser  } from "./api.js";
+import { addPost, getPosts, getPostsOneUser } from "./api.js";
 import { renderAddPostPageComponent } from "./components/add-post-page-component.js";
 import { renderAuthPageComponent } from "./components/auth-page-component.js";
 import {
@@ -20,8 +20,8 @@ export let user = getUserFromLocalStorage();
 export let page = null;
 export let posts = [];
 export const setPosts = (newPosts) => {
-  posts = newPosts
-}
+  posts = newPosts;
+};
 
 export const getToken = () => {
   const token = user ? `Bearer ${user.token}` : undefined;
@@ -75,19 +75,19 @@ export const goToPage = (newPage, data) => {
       // page = USER_POSTS_PAGE;
       // posts = [];
       // return renderApp();
-      page = LOADING_PAGE
-      renderApp()
-      const userId = data.userId
+      page = LOADING_PAGE;
+      renderApp();
+      const userId = data.userId;
       return getPostsOneUser({ token: getToken(), userId: userId })
-      .then((newPosts) => {
-        page = USER_POSTS_PAGE
-        posts = newPosts
-        renderApp()
-      })
-      .catch((error) => {
-        console.error(error)
-        goToPage(POSTS_PAGE)
-      })
+        .then((newPosts) => {
+          page = USER_POSTS_PAGE;
+          posts = newPosts;
+          renderApp();
+        })
+        .catch((error) => {
+          console.error(error);
+          goToPage(POSTS_PAGE);
+        });
     }
     page = newPage;
     renderApp();
@@ -125,21 +125,22 @@ export const renderApp = () => {
       appEl,
       onAddPostClick({ description, imageUrl }) {
         // TODO: реализовать добавление поста в API
-      addPost({
-        token: getToken(),
-        description,
-        imageUrl,
-      }).then((responseData) => {
-          console.log(responseData)
-          getPosts({ token: getToken() })
-          .then((response) => {
-            posts = response
-            renderApp()
-            goToPage(POSTS_PAGE)
-          })
-        }).catch((error) => {
-            console.warn(error)
+        addPost({
+          token: getToken(),
+          description,
+          imageUrl,
         })
+          .then((responseData) => {
+            console.log(responseData);
+            getPosts({ token: getToken() }).then((response) => {
+              posts = response;
+              renderApp();
+              goToPage(POSTS_PAGE);
+            });
+          })
+          .catch((error) => {
+            console.warn(error);
+          });
       },
     });
   }
@@ -152,7 +153,7 @@ export const renderApp = () => {
 
   if (page === USER_POSTS_PAGE) {
     // TODO: реализовать страницу фотографию пользвателя
-    return renderPostsPageComponent({appEl});
+    return renderPostsPageComponent({ appEl });
   }
 };
 
