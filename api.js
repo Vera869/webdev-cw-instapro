@@ -4,7 +4,7 @@ import { renderApp, setPosts } from './index.js'
 // "боевая" версия инстапро лежит в ключе prod
 //const personalKey = "prod";
 const personalKey = "Vera-Bu";
-const baseHost = "https://webdev-hw-api.vercel.app";
+const baseHost = 'https://wedev-api.sky.pro';
 const postsHost = `${baseHost}/api/v1/${personalKey}/instapro`;
 //let token = "Bearer bgc0b8awbwas6g5g5k5o5s5w606g37w3cc3bo3b83k39s3co3c83c03ck";
 
@@ -56,9 +56,6 @@ export function registerUser({ login, password, name, imageUrl }) {
           .replaceAll('"', "&quot;"),
       imageUrl,
     }),
-    // headers: {
-    //   Authorization: token,
-    // },
   }).then((response) => {
     if(response.status === 500) {
       throw new Error("Сервер сломался");
@@ -101,8 +98,7 @@ export function loginUser({ login, password }) {
       throw new Error("нет интернета")
    }
     return response.json();
-  })
-  .catch((error) => {
+  }).catch((error) => {
     if (error.message === "Сервер сломался") {
       alert("Сервер сломался, попробуй позже");
       return;

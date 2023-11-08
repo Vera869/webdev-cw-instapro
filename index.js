@@ -23,7 +23,7 @@ export const setPosts = (newPosts) => {
   posts = newPosts
 }
 
-const getToken = () => {
+export const getToken = () => {
   const token = user ? `Bearer ${user.token}` : undefined;
   return token;
 };
