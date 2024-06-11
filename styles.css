@@ -111,14 +111,14 @@
   margin-top: 20px;
 }
 
-.posts-user-header {
+.post-user-header {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-bottom: 12px;
 }
 
-.posts-user-header__user-image {
+.post-header-user-image {
   width: 70px;
   height: 70px;
   object-fit: cover;
@@ -126,7 +126,7 @@
   margin-right: 10px;
 }
 
-.posts-user-header__user-name {
+.post-header-user-name {
   font-size: 28px;
   line-height: 35px;
 }
